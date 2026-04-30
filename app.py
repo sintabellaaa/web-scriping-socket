@@ -5,6 +5,7 @@ import json
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+# --- Route untuk halaman utama ---
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -64,6 +65,7 @@ def delete_product(product_id):
 # --- Event WebSocket manual ---
 @socketio.on("get_products")
 def handle_get_products():
+    print("Client meminta data produk")  # log untuk debug
     emit("update_products", load_products())
 
 if __name__ == "__main__":
